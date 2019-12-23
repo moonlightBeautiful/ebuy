@@ -26,7 +26,7 @@ public class Order {
 	private Date createTime;
 	private float cost;
 	/**
-	 * ´ıÉóºË1 ÉóºËÍ¨¹ı2 ÒÑ·¢»õ3 ÒÑÊÕ»õ4
+	 * å¾…å®¡æ ¸1 å®¡æ ¸é€šè¿‡2 å·²å‘è´§3 å·²æ”¶è´§4
 	 */
 	private int status;
 

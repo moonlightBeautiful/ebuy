@@ -18,12 +18,12 @@ public class Product {
     private String proPic;
     private String description;
     /**
-     * ÊÇ·ñÈÈÂô 0 ²»ÊÇÈÈÂô£¬1 ÈÈÂô
+     * æ˜¯å¦çƒ­å– 0 ä¸æ˜¯çƒ­å–ï¼Œ1 çƒ­å–
      */
     private int hot;
     private Date hotTime;
     /**
-     * ÊÇ·ñÈÈÂô 0 ²»ÊÇÌØ¼Û£¬1 ÌØ¼Û
+     * æ˜¯å¦çƒ­å– 0 ä¸æ˜¯ç‰¹ä»·ï¼Œ1 ç‰¹ä»·
      */
     private int specialPrice;
     private Date specialPriceTime;

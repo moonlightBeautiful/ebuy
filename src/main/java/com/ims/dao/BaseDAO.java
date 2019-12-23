@@ -43,7 +43,7 @@ public interface BaseDAO<T> {
     public void merge(T o);
 
     /**
-     * 查询
+     * 查询集合（无条件，不分页）
      *
      * @param hql
      * @return
@@ -51,7 +51,7 @@ public interface BaseDAO<T> {
     public List<T> find(String hql);
 
     /**
-     * 查询集合
+     * 查询集合（有条件）
      *
      * @param hql
      * @param param
@@ -60,7 +60,7 @@ public interface BaseDAO<T> {
     public List<T> find(String hql, Object[] param);
 
     /**
-     * 查询集合
+     * 查询集合（有条件）
      *
      * @param hql
      * @param param
@@ -69,7 +69,7 @@ public interface BaseDAO<T> {
     public List<T> find(String hql, List<Object> param);
 
     /**
-     * 查询集合(带分页)
+     * 查询集合(有条件，带分页)
      *
      * @param hql
      * @param param
@@ -79,17 +79,17 @@ public interface BaseDAO<T> {
     public List<T> find(String hql, Object[] param, PageBean pageBean);
 
     /**
-     * 查询集合(带分页)
+     * 查询集合(有条件，带分页)
      *
      * @param hql
-     * @param param
+     * @param param 条件
      * @param pageBean 分页
      * @return
      */
     public List<T> find(String hql, List<Object> param, PageBean pageBean);
 
     /**
-     * 获得一个对象
+     * 获得一个对象(通过主键)
      *
      * @param c  对象类型
      * @param id
@@ -98,7 +98,7 @@ public interface BaseDAO<T> {
     public T get(Class<T> c, Serializable id);
 
     /**
-     * 获得一个对象
+     * 获得一个对象(通过条件)
      *
      * @param hql
      * @param param
@@ -107,7 +107,7 @@ public interface BaseDAO<T> {
     public T get(String hql, Object[] param);
 
     /**
-     * 获得一个对象
+     * 获得一个对象(通过条件)
      *
      * @param hql
      * @param param
@@ -116,7 +116,7 @@ public interface BaseDAO<T> {
     public T get(String hql, List<Object> param);
 
     /**
-     * select count(*) from 类
+     * 统计总个数 hql select count(*) from 类
      *
      * @param hql
      * @return
@@ -124,7 +124,7 @@ public interface BaseDAO<T> {
     public Long count(String hql);
 
     /**
-     * select count(*) from 类
+     * 统计总个数（带条件） hqlselect count(*) from 类
      *
      * @param hql
      * @param param

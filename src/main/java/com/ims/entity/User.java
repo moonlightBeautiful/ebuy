@@ -24,7 +24,7 @@ public class User {
     private String address;
 
     /**
-     * ÓÃ»§Éí·İ£¬1£¬ÆÕÍ¨ÓÃ»§£¬2£¬¹ÜÀíÔ±¡£
+     * ç”¨æˆ·èº«ä»½ï¼Œ1ï¼Œæ™®é€šç”¨æˆ·ï¼Œ2ï¼Œç®¡ç†å‘˜ã€‚
      */
     private int status = 1;
 

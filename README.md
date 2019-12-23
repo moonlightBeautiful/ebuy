@@ -41,18 +41,7 @@ mavan项目
         5.String replaceFirst(String regex,String replacement)
             使用给定的参数 replacement 替换字符串第一个匹配给定的正则表达式的子字符串。
         6.@Repository("")
-            用在dao层上
- 
- 
- 
-  1.@Autowired与@Resource
-             简介：
-                 都是注入
-             区别：
-                 @Autowired：会先按类型注入，然后按照名称注入，都无法找到唯一的一个实现类则报错。
-                 @Resource：会先按名称注入，然后按照类型注入，都无法找到唯一的一个实现类则报错。
-             使用：
-                 可以用在字段或者setter方法上，但是不推荐用在字段上，容易发生空指针错误，推荐使用在setter方法上。           
+            用在dao层上    
 ##建模
 需求后建模
     1.需求-业务流程
@@ -102,42 +91,76 @@ mavan项目
                     --》text
             Date--datetime
             float--》
-##缓存实现：
+##缓存实现
 常用数据缓存：就是在项目启动的时候把数据放到了application中
     1.在web.xml中配置自己的监听器
         <listener>  
             <listener-class>com.java1234.action.InitAction</listener-class>  
         </listener> 
     2.写一个IniAction，实现接口ServletContextListener,ApplicationContextAware
-        ServletContext:
-            servlet用来与容器间进行交互的接口的组合，在一个应用中(一个JVM)只有一个ServletContext, 换句话说，容器中所有的servlet都共享同一个ServletContext.
-        ServletConfig: 
-            它与ServletContext的区别在于，servletConfig是针对servlet而言的，每个servlet都有它独有的serveltConfig信息，相互之间不共享.
-        ApplicationContext: 
-            这个类是Spring实现容器功能的核心接口，它也是Spring实现IoC功能中最重要的接口，从它的名字中可以看出，它维护了整个程序运行期间所需要的上下文信息，
-             注意这里的应用程序并不一定是web程序，也可能是其它类型的应用. 在Spring中允许存在多个applicationContext，
-             这些context相互之间还形成了父与子，继承与被继承的关系，这也是通常我们所说的，
-             在spring中存在两个context,一个是root context，一个是servlet applicationContext的意思. 
-        WebApplicationContext: 
-            其实这个接口不过是applicationContext接口的一个子接口罢了，只不过说它的应用形式是web罢了. 
-            它在ApplicationContext的基础上，添加了对ServletContext的引用，即getServletContext方法   
-    3.服务类：
+        ApplicationContextAware接口：
+                如果Spring配置文件中所定义或者注解自动注入的Bean类实现了ApplicationContextAware 接口，那么在加载Spring配置文件时，
+            会自动调用ApplicationContextAware 接口中的方法：setApplicationContext (ApplicationContext context)。
+        ServletContextListener接口：
+                ServletContextListener接口用于tomcat启动和关闭时自动加载函数contextInitialized(ServletContextEvent sce)和contextDestroyed(ServletContextEvent sce)         
+        概念学习：    
+            ServletContext:
+                 servlet用来与容器间进行交互的接口的组合，在一个应用中(一个JVM)只有一个ServletContext, 换句话说，容器中所有的servlet都共享同一个ServletContext.
+            ServletConfig: 
+                 它与ServletContext的区别在于，servletConfig是针对servlet而言的，每个servlet都有它独有的serveltConfig信息，相互之间不共享.
+            ApplicationContext: 
+                 整个程序运行期间所需要的上下文信息。这个类是Spring实现容器功能的核心接口，它也是Spring实现IoC功能中最重要的接口。
+                 注意这里的应用程序并不一定是web程序，也可能是其它类型的应用. 在Spring中允许存在多个applicationContext，这些context相互之间还形成了父与子，继承与被继承的关系，这也是通常我们所说的，
+            WebApplicationContext: 
+                其实这个接口不过是applicationContext接口的一个子接口罢了，只不过说它的应用形式是web罢了. 
+                它在ApplicationContext的基础上，添加了对ServletContext的引用，即getServletContext方法   
+    3.IniAction调用服务类缓存数据：
         商品大类信息加入到 application缓存中
-        商品小类夹到，因为获取商品大类的时候，立即获取了商品小类，所以不用再次获取放入到application缓存中
-        标签加入到 application缓存中
-        公告，前8条加入到 application缓存中
-        新闻，前8条加入到 application缓存中
-        热卖，也就是商品,加入到 application缓存中
+        商品小类信息加入到 application缓存中
+            因为获取商品大类的时候，立即获取了商品小类，所以不用再次获取放入到application缓存中
+            @OneToMany(mappedBy = "bigType", fetch = FetchType.EAGER)
+        标签信息加入到 application缓存中
+        公告信息前8条加入到 application缓存中
+        新闻信息前8条加入到 application缓存中
+        热卖信息也就是商品,加入到 application缓存中
     学习到的：
-        Spring注解@Component、@Repository、@Service、@Controller区别
+        1.Spring注解@Component、@Repository、@Service、@Controller区别
             @Service服务层组件，用于标注业务层组件,表示定义一个bean，自动根据bean的类名实例化一个首写字母为小写的bean，                        
             @Controller用于标注控制层组件(如struts中的action)             
             @Repository持久层组件，用于标注数据访问组件，即DAO组件            
             @Component泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标注。    
             @Entity  明这个class是实体类，可以从数据库找到，如果没有它会帮你创建一个数据表的作用
+        2.@Autowired与@Resource
+            简介：
+               都是注入
+            区别：
+               @Autowired：会先按类型注入，然后按照名称注入，都无法找到唯一的一个实现类则报错。
+               @Resource：会先按名称注入，然后按照类型注入，都无法找到唯一的一个实现类则报错。
+            使用：
+               可以用在字段或者setter方法上，但是不推荐用在字段上，容易发生空指针错误，推荐使用在setter方法上。 
+        3. ApplicationContextAware接口：
+                  如果Spring配置文件中所定义或者注解自动注入的Bean类实现了ApplicationContextAware 接口，那么在加载Spring配置文件时，
+              会自动调用ApplicationContextAware 接口中的方法：setApplicationContext (ApplicationContext context)。
+        4. ServletContextListener接口：
+              ServletContextListener接口用于tomcat启动和关闭时自动加载函数contextInitialized(ServletContextEvent sce)和contextDestroyed(ServletContextEvent sce)         
+        5.概念学习：    
+            ServletContext:
+                servlet用来与容器间进行交互的接口的组合，在一个应用中(一个JVM)只有一个ServletContext, 换句话说，容器中所有的servlet都共享同一个ServletContext.
+            ServletConfig: 
+                它与ServletContext的区别在于，servletConfig是针对servlet而言的，每个servlet都有它独有的serveltConfig信息，相互之间不共享.
+            ApplicationContext: 
+                整个程序运行期间所需要的上下文信息。这个类是Spring实现容器功能的核心接口，它也是Spring实现IoC功能中最重要的接口。
+                注意这里的应用程序并不一定是web程序，也可能是其它类型的应用. 在Spring中允许存在多个applicationContext，这些context相互之间还形成了父与子，继承与被继承的关系，这也是通常我们所说的，
+            WebApplicationContext: 
+                其实这个接口不过是applicationContext接口的一个子接口罢了，只不过说它的应用形式是web罢了. 
+                它在ApplicationContext的基础上，添加了对ServletContext的引用，即getServletContext方法         
 ##页面实现：
-    1.下载易买网页面模板
-    2.
+    1.下载易买网页面模板，放到webapp
+        js+css+images+common+index.jsp
+    2.top.jsp
+        头部top.jsp：导航，首页的tag
+        左侧left.jsp：商品分类（大类+小类菜单）,最近浏览
+        中间index.jsp：特价，公告，新闻，热卖
          
          
          

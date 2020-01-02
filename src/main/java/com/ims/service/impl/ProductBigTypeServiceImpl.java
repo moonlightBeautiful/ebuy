@@ -4,14 +4,14 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.ims.dao.BaseDAO;
 import com.ims.entity.ProductBigType;
 import com.ims.service.ProductBigTypeService;
-import org.springframework.stereotype.Service;
-
 
 @Service("productBigTypeService")
-public class ProductBigTypeServiceImpl implements ProductBigTypeService {
+public class ProductBigTypeServiceImpl implements ProductBigTypeService{
 
 	@Resource
 	private BaseDAO<ProductBigType> baseDAO;

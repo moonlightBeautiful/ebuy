@@ -15,9 +15,21 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name="t_notice")
 public class Notice {
 
+	/**
+	 * 唯一标识
+	 */
 	private int id;
+	/**
+	 *标题
+	 */
 	private String title;
+	/**
+	 *内容
+	 */
 	private String content;
+	/**
+	 *创时间
+	 */
 	private Date createTime;
 	
 	@Id

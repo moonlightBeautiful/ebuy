@@ -1,149 +1,168 @@
 package com.ims.entity;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
-@Table(name = "t_product")
+@Table(name="t_product")
 public class Product {
-
-    private int id;
-    private String name;
-    private int price;
-    private int stock;
-    private String proPic;
-    private String description;
-    /**
-     * ÊòØÂê¶ÁÉ≠Âçñ 0 ‰∏çÊòØÁÉ≠ÂçñÔºå1 ÁÉ≠Âçñ
-     */
-    private int hot;
-    private Date hotTime;
-    /**
-     * ÊòØÂê¶ÁÉ≠Âçñ 0 ‰∏çÊòØÁâπ‰ª∑Ôºå1 Áâπ‰ª∑
-     */
-    private int specialPrice;
-    private Date specialPriceTime;
-
-    private ProductBigType bigType;
-    private ProductSmallType smallType;
-    private List<OrderProduct> orderProductList = new ArrayList<OrderProduct>();
-
-    @Id
-    @GeneratedValue(generator = "_native")
-    @GenericGenerator(name = "_native", strategy = "native")
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Column(length = 50)
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
-    public String getProPic() {
-        return proPic;
-    }
-
-    public void setProPic(String proPic) {
-        this.proPic = proPic;
-    }
-
-    @Column(length = 2000)
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getHot() {
-        return hot;
-    }
-
-    public void setHot(int hot) {
-        this.hot = hot;
-    }
-
-    public Date getHotTime() {
-        return hotTime;
-    }
-
-    public void setHotTime(Date hotTime) {
-        this.hotTime = hotTime;
-    }
-
-    public int getSpecialPrice() {
-        return specialPrice;
-    }
-
-    public void setSpecialPrice(int specialPrice) {
-        this.specialPrice = specialPrice;
-    }
-
-    public Date getSpecialPriceTime() {
-        return specialPriceTime;
-    }
-
-    public void setSpecialPriceTime(Date specialPriceTime) {
-        this.specialPriceTime = specialPriceTime;
-    }
-
-    @ManyToOne(targetEntity = ProductBigType.class)
-    @JoinColumn(name = "bigTypeId")
-    public ProductBigType getBigType() {
-        return bigType;
-    }
-
-    public void setBigType(ProductBigType bigType) {
-        this.bigType = bigType;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "smallTypeId")
-    public ProductSmallType getSmallType() {
-        return smallType;
-    }
-
-    public void setSmallType(ProductSmallType smallType) {
-        this.smallType = smallType;
-    }
-
-    @OneToMany
-    @JoinColumn(name = "productId")
-    public List<OrderProduct> getOrderProductList() {
-        return orderProductList;
-    }
-
-    public void setOrderProductList(List<OrderProduct> orderProductList) {
-        this.orderProductList = orderProductList;
-    }
+	/**
+	 * Œ®“ª±Í ∂
+	 */
+	private int id;
+	/**
+	 * √˚≥∆
+	 */
+	private String name;
+	/**
+	 * º€∏Ò
+	 */
+	private int price;
+	/**
+	 * ø‚¥Ê
+	 */
+	private int stock;
+	/**
+	 * …Ã∆∑Õº∆¨£¨’‚¿Ô «¬∑æ∂
+	 */
+	private String proPic;
+	/**
+	 * √Ë ˆ
+	 */
+	private String description;
+	/**
+	 *  «∑Ò»»¬Ù 0∑«»»¬Ù 1»»¬Ù
+	 */
+	private int hot;
+	/**
+	 * »»¬Ù ±º‰
+	 */
+	private Date hotTime;
+	/**
+	 * Ãÿº€
+	 */
+	private int specialPrice;
+	/**
+	 * Ãÿº€ ±º‰
+	 */
+	private Date specialPriceTime;
+	/**
+	 * À˘ Ù…Ã∆∑¥Û¿‡£∫…Ã∆∑vs…Ã∆∑¥Û¿‡=n£∫1
+	 */
+	private ProductBigType bigType;
+	/**
+	 * À˘ Ù…Ã∆∑–°¿‡£∫…Ã∆∑vs…Ã∆∑–°¿‡=n£∫1
+	 */
+	private ProductSmallType smallType;
+	/**
+	 * …Ã∆∑∫Õ∂©µ•πÿœµ£∫n:n
+	 */
+	private List<OrderProduct> orderProductList=new ArrayList<OrderProduct>();
+	
+	@Id
+	@GeneratedValue(generator="_native")
+	@GenericGenerator(name="_native",strategy="native")
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	@Column(length=50)
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	public String getProPic() {
+		return proPic;
+	}
+	public void setProPic(String proPic) {
+		this.proPic = proPic;
+	}
+	@Column(length=2000)
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public int getHot() {
+		return hot;
+	}
+	public void setHot(int hot) {
+		this.hot = hot;
+	}
+	public Date getHotTime() {
+		return hotTime;
+	}
+	public void setHotTime(Date hotTime) {
+		this.hotTime = hotTime;
+	}
+	public int getSpecialPrice() {
+		return specialPrice;
+	}
+	public void setSpecialPrice(int specialPrice) {
+		this.specialPrice = specialPrice;
+	}
+	public Date getSpecialPriceTime() {
+		return specialPriceTime;
+	}
+	public void setSpecialPriceTime(Date specialPriceTime) {
+		this.specialPriceTime = specialPriceTime;
+	}
+	@ManyToOne
+	@JoinColumn(name="bigTypeId")
+	public ProductBigType getBigType() {
+		return bigType;
+	}
+	public void setBigType(ProductBigType bigType) {
+		this.bigType = bigType;
+	}
+	
+	@ManyToOne
+	@JoinColumn(name="smallTypeId")
+	public ProductSmallType getSmallType() {
+		return smallType;
+	}
+	public void setSmallType(ProductSmallType smallType) {
+		this.smallType = smallType;
+	}
+	@OneToMany
+	@JoinColumn(name="productId")
+	public List<OrderProduct> getOrderProductList() {
+		return orderProductList;
+	}
+	public void setOrderProductList(List<OrderProduct> orderProductList) {
+		this.orderProductList = orderProductList;
+	}
+	
+	
+	
 }

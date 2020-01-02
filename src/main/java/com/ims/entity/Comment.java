@@ -13,12 +13,29 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="t_comment")
 public class Comment {
-
+	/**
+	 * 唯一标识
+	 */
 	private int id;
+	/**
+	 * 评论内容
+	 */
 	private String content;
+	/**
+	 * 匿名
+	 */
 	private String nickName;
+	/**
+	 * 创建时间
+	 */
 	private Date createTime;
+	/**
+	 * 回复内容
+	 */
 	private String replyContent;
+	/**
+	 * 回复时间
+	 */
 	private Date replyTime;
 	
 	@Id

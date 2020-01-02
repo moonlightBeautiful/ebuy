@@ -20,19 +20,33 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="t_order")
 public class Order {
-
+	/**
+	 * Î¨Ò»±êÊ¶
+	 */
 	private int id;
+	/**
+	 * ¶©µ¥ºÅ
+	 */
 	private String orderNo;
+	/**
+	 * ´´½¨Ê±¼ä
+	 */
 	private Date createTime;
+	/**
+	 * ×Ü¼Û
+	 */
 	private float cost;
 	/**
-	 * å¾…å®¡æ ¸1 å®¡æ ¸é€šè¿‡2 å·²å‘è´§3 å·²æ”¶è´§4
+	 * ×´Ì¬ ´ıÉóºË ÉóºËÍ¨¹ı Âô¼ÒÒÑ·¢»õ Âò¼ÒÒÑÊÕ»õ
 	 */
 	private int status;
-
+	/**
+	 * ËùÊôÓÃ»§£º¶©µ¥vsÓÃ»§=n:1
+	 */
 	private User user;
+	
 	private List<OrderProduct> orderProductList=new ArrayList<OrderProduct>();
-
+	
 	@Id
 	@GeneratedValue(generator="_native")
 	@GenericGenerator(name="_native",strategy="native")
@@ -66,7 +80,7 @@ public class Order {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	@ManyToOne(targetEntity = User.class)
+	@ManyToOne
 	@JoinColumn(name="userId",updatable=false)
 	public User getUser() {
 		return user;

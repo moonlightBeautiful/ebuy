@@ -4,30 +4,68 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "t_user")
 public class User {
-
-    private int id;
-    private String trueName;
-    private String userName;
-    private String password;
-    private String sex;
-    private Date birthday;
-    private String dentityCode;
-    private String email;
-    private String mobile;
-    private String address;
-
     /**
-     * ç”¨æˆ·èº«ä»½ï¼Œ1ï¼Œæ™®é€šç”¨æˆ·ï¼Œ2ï¼Œç®¡ç†å‘˜ã€‚
+     * Î¨Ò»±êÊ¶
+     */
+    private int id;
+    /**
+     * ÕæÊµĞÕÃû
+     */
+    private String trueName;
+    /**
+     * ÓÃ»§Ãû
+     */
+    private String userName;
+    /**
+     * ÃÜÂë
+     */
+    private String password;
+    /**
+     * ĞÔ±ğ
+     */
+    private String sex;
+    /**
+     * ³öÉúÈÕÆÚ
+     */
+    private Date birthday;
+    /**
+     * Éí·İÖ¤
+     */
+    private String dentityCode;
+    /**
+     * ÓÊÏä
+     */
+    private String email;
+    /**
+     * ÊÖ»úºÅ
+     */
+    private String mobile;
+    /**
+     * ×¡Ö·
+     */
+    private String address;
+    /**
+     * Éí·İ 1ÆÕÍ¨ÓÃ»§ 2¹ÜÀíÔ±
      */
     private int status = 1;
 
+    /**
+     * ¶©µ¥£ºÓÃ»§vs¶©µ¥=1£ºn
+     */
     private List<Order> orderList = new ArrayList<Order>();
 
     @Id
@@ -138,5 +176,6 @@ public class User {
     public void setOrderList(List<Order> orderList) {
         this.orderList = orderList;
     }
+
 
 }

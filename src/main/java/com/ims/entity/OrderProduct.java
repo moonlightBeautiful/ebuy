@@ -12,10 +12,21 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name="t_order_product")
 public class OrderProduct {
-
+	/**
+	 * 唯一标识
+	 */
 	private int id;
+	/**
+	 * 商品数量
+	 */
 	private int num;
+	/**
+	 * 订单
+	 */
 	private Order order;
+	/**
+	 * 商品
+	 */
 	private Product product;
 	
 	@Id

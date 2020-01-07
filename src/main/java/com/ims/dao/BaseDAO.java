@@ -49,12 +49,12 @@ public interface BaseDAO<T> {
     public void merge(T o);
 
     /**
-     * 查询集合
+     * 查询集合（执行hql）
      *
      * @param hql
      * @return
      */
-    public List<T> find(String hql);
+    List<T> find(String hql);
 
     /**
      * 查询集合

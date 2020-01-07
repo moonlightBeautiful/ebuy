@@ -122,28 +122,20 @@ mavan项目
             Date--datetime
             float--》
 ##缓存实现
-常用数据缓存：就是在项目启动的时候把数据放到了application中
-    1.在web.xml中配置自己的监听器
-        <listener>  
-            <listener-class>com.ims.action.InitAction</listener-class>  
-        </listener> 
-    2.写一个IniAction，实现接口ServletContextListener,ApplicationContextAware
-        ApplicationContextAware接口：
-                如果Spring配置文件中所定义或者注解自动注入的Bean类实现了ApplicationContextAware 接口，那么在加载Spring配置文件时，
-            会自动调用ApplicationContextAware 接口中的方法：setApplicationContext (ApplicationContext context)。
-        ServletContextListener接口：
-                ServletContextListener接口用于tomcat启动和关闭时自动加载函数contextInitialized(ServletContextEvent sce)和contextDestroyed(ServletContextEvent sce)         
-        概念学习：    
-            ServletContext:
-                 servlet用来与容器间进行交互的接口的组合，在一个应用中(一个JVM)只有一个ServletContext, 换句话说，容器中所有的servlet都共享同一个ServletContext.
-            ServletConfig: 
-                 它与ServletContext的区别在于，servletConfig是针对servlet而言的，每个servlet都有它独有的serveltConfig信息，相互之间不共享.
-            ApplicationContext: 
-                 整个程序运行期间所需要的上下文信息。这个类是Spring实现容器功能的核心接口，它也是Spring实现IoC功能中最重要的接口。
-                 注意这里的应用程序并不一定是web程序，也可能是其它类型的应用. 在Spring中允许存在多个applicationContext，这些context相互之间还形成了父与子，继承与被继承的关系，这也是通常我们所说的，
-            WebApplicationContext: 
-                其实这个接口不过是applicationContext接口的一个子接口罢了，只不过说它的应用形式是web罢了. 
-                它在ApplicationContext的基础上，添加了对ServletContext的引用，即getServletContext方法   
+常用数据缓存：就是在项目启动的时候把首页数据放到了application中
+    1.写一个IniAction，随着服务器启动而启动
+        1.由spring来管理，使用注解@componet
+        2.web.xml配置监听
+            <listener>  
+                <listener-class>com.ims.action.InitAction</listener-class>  
+            </listener> 
+        3.实现接口ServletContextListener
+            tomcat启动和关闭时会自动加载函数contextInitialized(ServletContextEvent sce)和contextDestroyed(ServletContextEvent sce)   
+        4.实现接口ApplicationContextAware
+            加载Spring配置文件时会自动加载函数setApplicationContext (ApplicationContext context)
+            组件扫描，不能确保Service和IniAction谁先被扫描到，谁先被加载，
+            也就是说在tomcat启动时自动加载函数contextInitialized，执行getBean("服务bean"")时可能会得到null。
+            所以，使用static ApplicationContext applicationContext 类属性   
     3.IniAction调用服务类缓存数据：
         商品大类信息加入到 application缓存中
         商品小类信息加入到 application缓存中
@@ -153,23 +145,17 @@ mavan项目
         公告信息前8条加入到 application缓存中
         新闻信息前8条加入到 application缓存中
         热卖信息也就是商品,加入到 application缓存中
-    学习到的：
-        3. ApplicationContextAware接口：
-                  如果Spring配置文件中所定义或者注解自动注入的Bean类实现了ApplicationContextAware 接口，那么在加载Spring配置文件时，
-              会自动调用ApplicationContextAware 接口中的方法：setApplicationContext (ApplicationContext context)。
-        4. ServletContextListener接口：
-              ServletContextListener接口用于tomcat启动和关闭时自动加载函数contextInitialized(ServletContextEvent sce)和contextDestroyed(ServletContextEvent sce)         
-        5.概念学习：    
-            ServletContext:
-                servlet用来与容器间进行交互的接口的组合，在一个应用中(一个JVM)只有一个ServletContext, 换句话说，容器中所有的servlet都共享同一个ServletContext.
-            ServletConfig: 
-                它与ServletContext的区别在于，servletConfig是针对servlet而言的，每个servlet都有它独有的serveltConfig信息，相互之间不共享.
-            ApplicationContext: 
-                整个程序运行期间所需要的上下文信息。这个类是Spring实现容器功能的核心接口，它也是Spring实现IoC功能中最重要的接口。
-                注意这里的应用程序并不一定是web程序，也可能是其它类型的应用. 在Spring中允许存在多个applicationContext，这些context相互之间还形成了父与子，继承与被继承的关系，这也是通常我们所说的，
-            WebApplicationContext: 
-                其实这个接口不过是applicationContext接口的一个子接口罢了，只不过说它的应用形式是web罢了. 
-                它在ApplicationContext的基础上，添加了对ServletContext的引用，即getServletContext方法         
+    学习到的：    
+        ServletContext:
+            servlet用来与容器(tomcat)间进行交互的接口的组合，在一个应用中(一个JVM)只有一个ServletContext, 换句话说，容器中所有的servlet都共享同一个ServletContext.
+        ServletConfig: 
+            它与ServletContext的区别在于，servletConfig是针对servlet而言的，每个servlet都有它独有的serveltConfig信息，相互之间不共享.
+        ApplicationContext: 
+            整个程序运行期间所需要的上下文信息。这个类是Spring实现容器功能的核心接口，它也是Spring实现IoC功能中最重要的接口。
+            注意这里的应用程序并不一定是web程序，也可能是其它类型的应用. 在Spring中允许存在多个applicationContext，这些context相互之间还形成了父与子，继承与被继承的关系，这也是通常我们所说的，
+        WebApplicationContext: 
+            其实这个接口不过是applicationContext接口的一个子接口罢了，只不过说它的应用形式是web罢了. 
+            它在ApplicationContext的基础上，添加了对ServletContext的引用，即getServletContext方法         
 ##页面实现：
 基本主页搭建
     1.下载易买网页面模板，放到webapp

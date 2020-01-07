@@ -7,5 +7,5 @@ import com.ims.entity.PageBean;
 
 public interface NewsService {
 
-	public List<News> findNewsList(News s_news, PageBean pageBean);
+    List<News> findNewsList(News s_news, PageBean pageBean);
 }

@@ -13,20 +13,20 @@ import com.ims.entity.PageBean;
 import com.ims.service.NoticeService;
 
 @Service("noticeService")
-public class NoticeServiceImpl implements NoticeService{
+public class NoticeServiceImpl implements NoticeService {
 
-	@Resource
-	private BaseDAO<Notice> baseDAO;
-	
-	@Override
-	public List<Notice> findNoticeList(Notice s_notice, PageBean pageBean) {
-		List<Object> param=new LinkedList<Object>();
-		StringBuffer hql=new StringBuffer("from Notice");
-		if(pageBean!=null){
-			return baseDAO.find(hql.toString(), param, pageBean);
-		}else{
-			return null;
-		}
-	}
+    @Resource
+    private BaseDAO<Notice> baseDAO;
+
+    @Override
+    public List<Notice> findNoticeList(Notice s_notice, PageBean pageBean) {
+        StringBuffer hql = new StringBuffer("from Notice");
+        List<Object> param = new LinkedList<Object>();
+        if (pageBean != null) {
+            return baseDAO.find(hql.toString(), param, pageBean);
+        } else {
+            return null;
+        }
+    }
 
 }

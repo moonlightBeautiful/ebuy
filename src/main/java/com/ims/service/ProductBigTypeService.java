@@ -6,5 +6,5 @@ import com.ims.entity.ProductBigType;
 
 public interface ProductBigTypeService {
 
-	public List<ProductBigType> findAllBigTypeList();
+    List<ProductBigType> findAllBigTypeList();
 }

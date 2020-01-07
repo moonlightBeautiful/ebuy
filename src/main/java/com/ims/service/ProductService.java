@@ -7,7 +7,7 @@ import com.ims.entity.Product;
 
 public interface ProductService {
 
-	public List<Product> findProductList(Product s_product, PageBean pageBean);
-	
-	public Long getProductCount(Product s_product);
+    List<Product> findProductList(Product s_product, PageBean pageBean);
+
+    Long getProductCount(Product s_product);
 }

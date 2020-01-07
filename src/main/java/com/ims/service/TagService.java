@@ -6,5 +6,5 @@ import com.ims.entity.Tag;
 
 public interface TagService {
 
-	public List<Tag> findTagList();
+    List<Tag> findTagList();
 }

@@ -11,14 +11,14 @@ import com.ims.entity.ProductBigType;
 import com.ims.service.ProductBigTypeService;
 
 @Service("productBigTypeService")
-public class ProductBigTypeServiceImpl implements ProductBigTypeService{
+public class ProductBigTypeServiceImpl implements ProductBigTypeService {
 
-	@Resource
-	private BaseDAO<ProductBigType> baseDAO;
-	
-	@Override
-	public List<ProductBigType> findAllBigTypeList() {
-		return baseDAO.find(" from ProductBigType");
-	}
+    @Resource
+    private BaseDAO<ProductBigType> baseDAO;
+
+    @Override
+    public List<ProductBigType> findAllBigTypeList() {
+        return baseDAO.find("from ProductBigType");
+    }
 
 }

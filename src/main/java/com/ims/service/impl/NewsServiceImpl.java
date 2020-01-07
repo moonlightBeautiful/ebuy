@@ -14,20 +14,20 @@ import com.ims.entity.PageBean;
 import com.ims.service.NewsService;
 
 @Service("newsService")
-public class NewsServiceImpl implements NewsService{
+public class NewsServiceImpl implements NewsService {
 
-	@Resource
-	private BaseDAO<News> baseDAO;
-	
-	@Override
-	public List<News> findNewsList(News s_news, PageBean pageBean) {
-		List<Object> param=new LinkedList<Object>();
-		StringBuffer hql=new StringBuffer("from News");
-		if(pageBean!=null){
-			return baseDAO.find(hql.toString(), param, pageBean);
-		}else{
-			return null;
-		}
-	}
+    @Resource
+    private BaseDAO<News> baseDAO;
+
+    @Override
+    public List<News> findNewsList(News s_news, PageBean pageBean) {
+        StringBuffer hql = new StringBuffer("from News");
+        List<Object> param = new LinkedList<Object>();
+        if (pageBean != null) {
+            return baseDAO.find(hql.toString(), param, pageBean);
+        } else {
+            return null;
+        }
+    }
 
 }

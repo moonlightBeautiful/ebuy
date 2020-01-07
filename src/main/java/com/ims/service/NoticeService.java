@@ -7,5 +7,5 @@ import com.ims.entity.PageBean;
 
 public interface NoticeService {
 
-	public List<Notice> findNoticeList(Notice s_notice, PageBean pageBean);
+    List<Notice> findNoticeList(Notice s_notice, PageBean pageBean);
 }
